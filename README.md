@@ -1,7 +1,7 @@
 ## 💫 About Me
 
 👋 Hi, I'm **Saran** – a B.Tech student in **AI & Data Science**, driven by a passion for blending tradition with modern innovation.  
-My GitHub handle **@perfectmens** reflects my pursuit of perfection and precision.
+
 
 <h3>🧠 Interests</h3>
 
