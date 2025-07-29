@@ -3,12 +3,25 @@
 👋 Hi, I'm **Saran** – a B.Tech student in **AI & Data Science**, driven by a passion for blending tradition with modern innovation.  
 My GitHub handle **@perfectmens** reflects my pursuit of perfection and precision.
 
-### 🧠 Interests
-- AI & Machine Learning  
-- Data Analytics & Visualization  
-- Generative AI & Prompt Engineering  
-- Full Stack Web Development  
-- Offline LLMs & Self-hosted Tools
+<h3>🧠 Interests</h3>
+
+<table>
+  <tr>
+    <td valign="top" width="60%">
+      <ul>
+        <li>AI & Machine Learning</li>
+        <li>Data Analytics & Visualization</li>
+        <li>Generative AI & Prompt Engineering</li>
+        <li>Full Stack Web Development</li>
+        <li>Offline LLMs & Self-hosted Tools</li>
+      </ul>
+    </td>
+    <td align="right" width="500%">
+      <img src="uidwepg.webp" alt="Developer GIF" width="250"/>
+    </td>
+  </tr>
+</table>
+
 
 ### 🧰 Tech Stack
 **Languages:** Python, SQL, C++, JavaScript  
