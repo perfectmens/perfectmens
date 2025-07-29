@@ -30,8 +30,11 @@
 **Web:** HTML, CSS, Tailwind, React (basic)  
 **Models:** LLaMA 2, Qwen 2.5, GPT, custom fine-tuned LLMs
 
-![snake animation](https://github.com/perfectmens/perfectmens/blob/output/github-contribution-grid-snake2.svg)
+<div align = "center">
 
+
+  ![snake gif](https://github.com/perfectmens/perfectmens/blob/output/github-snake-dark.svg)
+</div>
 
 ### 🚀 Current Focus
 - 🧠 TCS iON NPT – AI Exam Preparation  
