@@ -45,11 +45,8 @@ I build ethical, purposeful, and clean solutions for real-world needs.
 🤝 Always open to collaborate on meaningful AI & open-source projects.
 
 ## 🌐 Socials:
+[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://instagram.com/perfectmens) [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/saran-k-4414302b7) [![X](https://img.shields.io/badge/X-black.svg?logo=X&logoColor=white)](https://x.com/perfectgamer154) [![Email](https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white)](mailto:sarankumarktg@gmail.com)
 
-[![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://instagram.com/perfectmens)  
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/saran-k-4414302b7)  
-[![X](https://img.shields.io/badge/X-black.svg?logo=X&logoColor=white)](https://x.com/perfectgamer154)  
-[![Email](https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white)](mailto:sarankumarktg@gmail.com)
 
 
 
