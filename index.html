@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saran K - AI & Data Science Portfolio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/lucide-react@latest/dist/lucide-react.js"></script>
+    
+    <!-- Custom Styles and Theme Configuration -->
+    <style>
+        :root {
+            --background: 0 0% 100%;
+            --foreground: 240 10% 3.9%;
+            --card: 0 0% 100%;
+            --card-foreground: 240 10% 3.9%;
+            --popover: 0 0% 100%;
+            --popover-foreground: 240 10% 3.9%;
+            --primary: 240 58% 61%; /* rgb(94, 93, 220) */
+            --primary-foreground: 0 0% 98%;
+            --highlight: 53 93% 46%; /* #E0C60B */
+            --highlight-foreground: 240 10% 3.9%;
+            --secondary: 240 4.8% 95.9%;
+            --secondary-foreground: 240 5.9% 10%;
+            --muted: 240 4.8% 95.9%;
+            --muted-foreground: 240 3.8% 46.1%;
+            --accent: 240 4.8% 95.9%;
+            --accent-foreground: 240 5.9% 10%;
+            --destructive: 0 84.2% 60.2%;
+            --destructive-foreground: 0 0% 98%;
+            --border: 240 5.9% 90%;
+            --input: 240 5.9% 90%;
+            --ring: 240 5.9% 10%;
+            --radius: 0.5rem;
+        }
+
+        .dark {
+            --background: 224 71% 4%;
+            --foreground: 0 0% 98%;
+            --card: 240 10% 3.9%;
+            --card-foreground: 0 0% 98%;
+            --popover: 240 10% 3.9%;
+            --popover-foreground: 0 0% 98%;
+            --primary: 240 58% 61%; /* rgb(94, 93, 220) */
+            --primary-foreground: 0 0% 98%;
+            --highlight: 53 93% 46%; /* #E0C60B */
+            --highlight-foreground: 240 10% 3.9%;
+            --secondary: 240 3.7% 15.9%;
+            --secondary-foreground: 0 0% 98%;
+            --muted: 240 3.7% 15.9%;
+            --muted-foreground: 240 5% 64.9%;
+            --accent: 240 3.7% 15.9%;
+            --accent-foreground: 0 0% 98%;
+            --destructive: 0 84.2% 60.2%;
+            --destructive-foreground: 0 0% 98%;
+            --border: 240 3.7% 15.9%;
+            --input: 240 3.7% 15.9%;
+            --ring: 240 4.9% 83.9%;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: hsl(var(--background));
+            color: hsl(var(--foreground));
+            scroll-behavior: smooth;
+        }
+
+        .hero-gradient {
+            background-color: hsl(var(--background));
+            background-image:
+                radial-gradient(at 0% 0%, hsl(var(--primary) / 0.4) 0px, transparent 50%),
+                radial-gradient(at 90% 80%, hsla(273, 58%, 61%, 0.4) 0px, transparent 50%);
+        }
+        
+        .dark .hero-gradient {
+            background-color: hsl(var(--background));
+            background-image:
+                radial-gradient(at 0% 0%, hsl(var(--primary) / 0.5) 0px, transparent 50%),
+                radial-gradient(at 90% 80%, hsla(273, 58%, 61%, 0.5) 0px, transparent 50%);
+        }
+        
+        /* Loading spinner */
+        .loader {
+            border: 4px solid hsl(var(--secondary));
+            border-top: 4px solid hsl(var(--primary));
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Chatbot styles */
+        #chatbot-container {
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+        
+        .chat-message {
+            max-width: 80%;
+        }
+
+        /* Skill icon color in dark mode */
+        .dark .skill-icon {
+            filter: invert(1) brightness(2);
+        }
+
+    </style>
+</head>
+<body class="transition-colors duration-300">
+
+    <!-- Header -->
+    <header class="bg-background/80 backdrop-blur-sm border-b border-border sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold" style="color: hsl(var(--highlight));">SK</a>
+                </div>
+                <nav class="hidden md:flex md:space-x-8 items-center">
+                    <a href="#about" class="text-muted-foreground hover:text-primary transition-all duration-300 transform hover:scale-110">About</a>
+                    <a href="#education" class="text-muted-foreground hover:text-primary transition-all duration-300 transform hover:scale-110">Education</a>
+                    <a href="#skills" class="text-muted-foreground hover:text-primary transition-all duration-300 transform hover:scale-110">Skills</a>
+                    <a href="#internship" class="text-muted-foreground hover:text-primary transition-all duration-300 transform hover:scale-110">Internship</a>
+                    <a href="#projects" class="text-muted-foreground hover:text-primary transition-all duration-300 transform hover:scale-110">Projects</a>
+                    <a href="#contact" class="text-highlight-foreground hover:opacity-90 px-6 py-2 rounded-md font-semibold transition-all duration-300 transform hover:scale-105" style="background-color: hsl(var(--highlight));">Contact</a>
+                </nav>
+                <div class="flex items-center">
+                    <button id="theme-toggle" class="p-2 rounded-md text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-ring transition-all duration-300 transform hover:scale-110">
+                        <svg id="theme-icon-light" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                        <svg id="theme-icon-dark" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                    </button>
+                    <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-muted-foreground hover:text-primary focus:outline-none focus:ring-2 focus:ring-ring ml-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-primary hover:bg-secondary">About</a>
+                <a href="#education" class="block px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-primary hover:bg-secondary">Education</a>
+                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-primary hover:bg-secondary">Skills</a>
+                <a href="#internship" class="block px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-primary hover:bg-secondary">Internship</a>
+                <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-primary hover:bg-secondary">Projects</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-primary hover:bg-secondary">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 pt-10">
+        
+        <!-- Hero Section -->
+        <section id="hero" class="relative py-20 hero-gradient rounded-lg min-h-[90vh] flex items-center">
+            <div class="grid md:grid-cols-2 gap-10 items-center">
+                <div class="text-center md:text-left md:pl-12">
+                    <p class="text-lg font-semibold" style="color: hsl(var(--primary));">Hello, I'm</p>
+                    <h1 class="text-5xl md:text-6xl font-bold tracking-tight mt-2">
+                        Saran K
+                    </h1>
+                    <h2 class="text-3xl md:text-4xl font-semibold text-muted-foreground mt-2">An AI & Data Science Specialist</h2>
+                    <a href="#contact" class="mt-8 inline-block text-highlight-foreground hover:opacity-90 px-8 py-3 rounded-md font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg" style="background-color: hsl(var(--highlight));">Hire Me</a>
+                </div>
+                <div class="flex justify-center">
+                    <div class="p-1.5 rounded-full bg-white shadow-lg transition-all duration-300 transform hover:scale-105">
+                        <img src="https://i.postimg.cc/PJXppFPF/Gemini-Generated-Image-cgx88bcgx88bcgx8.png" alt="Saran K" class="rounded-full w-80 h-80 md:w-96 md:h-96 object-cover border-4 border-background">
+                    </div>
+                </div>
+            </div>
+            <!-- Scroll Down Arrow -->
+            <a href="#about" class="absolute bottom-10 left-1/2 -translate-x-1/2 text-muted-foreground animate-bounce">
+                <div id="scroll-down-icon" class="w-8 h-8"></div>
+            </a>
+        </section>
+
+        <!-- SVG Wave Divider -->
+        <div class="w-full" style="color: hsl(var(--background));">
+            <svg viewBox="0 0 1440 100" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="block">
+                <path d="M1440 100H0V0C196.495 69.2375 518.5 100 720 100C921.5 100 1243.5 69.2375 1440 0V100Z"></path>
+            </svg>
+        </div>
+
+
+        <!-- About Section -->
+        <section id="about" class="py-20 grid md:grid-cols-2 gap-10 items-center">
+            <div class="flex justify-center">
+                <img src="https://i.postimg.cc/PJXppFPF/Gemini-Generated-Image-cgx88bcgx88bcgx8.png" alt="Saran K" class="rounded-lg w-full max-w-sm shadow-lg transition-all duration-300 transform hover:scale-105">
+            </div>
+            <div>
+                <h2 class="text-4xl font-bold tracking-tight">Designing Solutions, Not Just Visuals</h2>
+                <p class="mt-4 text-lg text-muted-foreground leading-relaxed">
+                    I am an aspiring AI and Data Science student with a solid foundation in machine learning, data analytics, and distributed computing systems. I am passionate about leveraging my technical skills and practical experience to solve real-world problems.
+                </p>
+                <p class="mt-4 text-lg text-muted-foreground leading-relaxed">
+                    My experience includes developing predictive models, building scalable databases, and implementing distributed file systems. I am a quick learner with strong communication and teamwork skills, always eager to tackle new challenges in the world of data.
+                </p>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="py-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold tracking-tight">Education</h2>
+                <p class="mt-4 text-lg text-muted-foreground">My academic background.</p>
+            </div>
+            <div class="max-w-3xl mx-auto">
+                <div class="space-y-8">
+                    <div class="bg-card border border-border rounded-lg p-6 shadow-md transition-all duration-300 hover:shadow-xl hover:border-primary">
+                        <h3 class="text-2xl font-semibold text-card-foreground">B.Tech in Artificial Intelligence & Data Science</h3>
+                        <p class="text-muted-foreground">Sengunthar Engineering College, Tiruchengode</p>
+                        <p class="text-sm text-muted-foreground">Oct 2022 - May 2026 | CGPA: 7.23 (till 5th sem)</p>
+                    </div>
+                    <div class="bg-card border border-border rounded-lg p-6 shadow-md transition-all duration-300 hover:shadow-xl hover:border-primary">
+                        <h3 class="text-xl font-semibold text-card-foreground">Higher Secondary Certificate (HSC)</h3>
+                        <p class="text-muted-foreground">CSI SEC School, Kotagiri</p>
+                    </div>
+                     <div class="bg-card border border-border rounded-lg p-6 shadow-md transition-all duration-300 hover:shadow-xl hover:border-primary">
+                        <h3 class="text-xl font-semibold text-card-foreground">Secondary School Leaving Certificate (SSLC)</h3>
+                        <p class="text-muted-foreground">CSI SEC School, Kotagiri</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section (NEW) -->
+        <section id="skills" class="py-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold tracking-tight">My Tech Stack & Skills</h2>
+                <p class="mt-4 text-lg text-muted-foreground">The tools and technologies I use to build solutions.</p>
+            </div>
+            <div class="max-w-5xl mx-auto space-y-12">
+                <!-- Languages -->
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6 text-center">Languages</h3>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <div class="flex items-center gap-2 bg-secondary text-secondary-foreground py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105"><img src="https://cdn.simpleicons.org/python/3776AB" alt="Python" class="w-6 h-6 object-contain skill-icon"><span>Python</span></div>
+                        <div class="flex items-center gap-2 bg-secondary text-secondary-foreground py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105"><img src="https://cdn.simpleicons.org/html5/E34F26" alt="HTML5" class="w-6 h-6 object-contain skill-icon"><span>HTML5</span></div>
+                        <div class="flex items-center gap-2 bg-secondary text-secondary-foreground py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105"><img src="https://upload.wikimedia.org/wikipedia/commons/6/62/CSS3_logo.svg" alt="CSS3" class="w-6 h-6 object-contain skill-icon"><span>CSS3</span></div>
+                        <div class="flex items-center gap-2 bg-secondary text-secondary-foreground py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105"><img src="https://cdn.simpleicons.org/github/181717" alt="Mojo" class="w-6 h-6 object-contain skill-icon"><span>Mojo</span></div>
+                    </div>
+                </div>
+                <!-- Frameworks & Libraries -->
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6 text-center">Frameworks & Libraries</h3>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <div class="flex items-center gap-2 bg-secondary text-secondary-foreground py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105"><img src="https://cdn.simpleicons.org/numpy/013243" alt="NumPy" class="w-6 h-6 object-contain skill-icon"><span>NumPy</span></div>
+                        <div class="flex items-center gap-2 bg-secondary text-secondary-foreground py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105"><img src="https://cdn.simpleicons.org/pandas/150458" alt="Pandas" class="w-6 h-6 object-contain skill-icon"><span>Pandas</span></div>
+                        <div class="flex items-center gap-2 bg-secondary text-secondary-foreground py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105"><img src="https://matplotlib.org/_static/logo2_compressed.svg" alt="Matplotlib" class="w-6 h-6 object-contain skill-icon"><span>Matplotlib</span></div>
+                        <div class="flex items-center gap-2 bg-secondary text-secondary-foreground py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105"><img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg" alt="Scikit-learn" class="w-6 h-6 object-contain skill-icon"><span>Scikit-learn</span></div>
+                        <div class="flex items-center gap-2 bg-secondary text-secondary-foreground py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105"><img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Hadoop_logo.svg" alt="Hadoop" class="w-6 h-6 object-contain skill-icon"><span>Apache Hadoop</span></div>
+                    </div>
+                </div>
+                <!-- Databases, Tools & Platforms -->
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-6 text-center">Databases & Tools</h3>
+                        <div class="flex flex-wrap justify-center gap-4">
+                            <div class="flex items-center gap-2 bg-secondary text-secondary-foreground py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105"><img src="https://cdn.simpleicons.org/mysql/4479A1" alt="SQL" class="w-6 h-6 object-contain skill-icon"><span>SQL</span></div>
+                            <div class="flex items-center gap-2 bg-secondary text-secondary-foreground py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105"><img src="https://cdn.simpleicons.org/apachecassandra/1287B1" alt="Apache Cassandra" class="w-6 h-6 object-contain skill-icon"><span>Apache Cassandra</span></div>
+                            <div class="flex items-center gap-2 bg-secondary text-secondary-foreground py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105"><img src="https://upload.wikimedia.org/wikipedia/commons/7/73/Microsoft_Excel_2013_logo.svg" alt="Excel" class="w-6 h-6 object-contain skill-icon"><span>Microsoft Excel</span></div>
+                            <div class="flex items-center gap-2 bg-secondary text-secondary-foreground py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105"><img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="Power BI" class="w-6 h-6 object-contain skill-icon"><span>Power BI</span></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-6 text-center">Platforms & IDEs</h3>
+                        <div class="flex flex-wrap justify-center gap-4">
+                            <div class="flex items-center gap-2 bg-secondary text-secondary-foreground py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105"><img src="https://cdn.simpleicons.org/jupyter/F37626" alt="Jupyter" class="w-6 h-6 object-contain skill-icon"><span>Jupyter</span></div>
+                            <div class="flex items-center gap-2 bg-secondary text-secondary-foreground py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105"><img src="https://cdn.simpleicons.org/pycharm/000000" alt="PyCharm" class="w-6 h-6 object-contain skill-icon"><span>PyCharm</span></div>
+                            <div class="flex items-center gap-2 bg-secondary text-secondary-foreground py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg" alt="VS Code" class="w-6 h-6 object-contain skill-icon"><span>VS Code</span></div>
+                            <div class="flex items-center gap-2 bg-secondary text-secondary-foreground py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105"><img src="https://colab.research.google.com/img/colab_favicon_256px.png" alt="Google Colab" class="w-6 h-6 object-contain skill-icon"><span>Google Colab</span></div>
+                        </div>
+                    </div>
+                </div>
+                 <!-- Soft Skills -->
+                <div>
+                    <h3 class="text-2xl font-semibold mb-6 text-center">Soft Skills</h3>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <span class="bg-secondary text-secondary-foreground py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105">Quick Learning</span>
+                        <span class="bg-secondary text-secondary-foreground py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105">Communication</span>
+                        <span class="bg-secondary text-secondary-foreground py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105">Teamwork</span>
+                        <span class="bg-secondary text-secondary-foreground py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105">Problem Solving</span>
+                        <span class="bg-secondary text-secondary-foreground py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105">Time Management</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Internship Section -->
+        <section id="internship" class="py-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold tracking-tight">Internship Certificate</h2>
+                <p class="mt-4 text-lg text-muted-foreground">Proof of my hands-on experience in the field.</p>
+            </div>
+            <div class="max-w-3xl mx-auto bg-card border border-border rounded-lg p-6 shadow-md transition-all duration-300 hover:shadow-xl hover:border-primary">
+                <div class="text-center">
+                    <h3 class="text-2xl font-semibold text-card-foreground mb-4">AI & Machine Learning Internship</h3>
+                    <p class="text-muted-foreground mb-6">Completed a comprehensive internship focused on the practical applications of AI and Machine Learning, gaining valuable industry experience.</p>
+                   
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold tracking-tight">Digital Product Showcases</h2>
+                <p class="mt-4 text-lg text-muted-foreground">A selection of my work.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-card border border-border rounded-lg p-6 transition-all duration-300 hover:shadow-xl hover:border-primary transform hover:-translate-y-1">
+                    <h3 class="text-2xl font-semibold text-card-foreground">Commodity Price Prediction</h3>
+                    <p class="mt-2 text-muted-foreground">Developed an LSTM model for price forecasting of essential commodities and visualized trends with Matplotlib.</p>
+                    <button class="explain-btn mt-4 bg-secondary text-secondary-foreground hover:bg-secondary/80 px-4 py-2 rounded-md font-semibold text-sm transition-colors" data-project="Commodity Price Prediction">Explain with AI</button>
+                </div>
+                <div class="bg-card border border-border rounded-lg p-6 transition-all duration-300 hover:shadow-xl hover:border-primary transform hover:-translate-y-1">
+                    <h3 class="text-2xl font-semibold text-card-foreground">Customer Database Management AI</h3>
+                    <p class="mt-2 text-muted-foreground">Built a scalable customer database system with Cassandra, integrating AI logic for access control and efficient retrieval.</p>
+                    <button class="explain-btn mt-4 bg-secondary text-secondary-foreground hover:bg-secondary/80 px-4 py-2 rounded-md font-semibold text-sm transition-colors" data-project="Customer Database Management AI">Explain with AI</button>
+                </div>
+                <div class="bg-card border border-border rounded-lg p-6 transition-all duration-300 hover:shadow-xl hover:border-primary transform hover:-translate-y-1">
+                    <h3 class="text-2xl font-semibold text-card-foreground">Distributed File Systems</h3>
+                    <p class="mt-2 text-muted-foreground">Implemented HDFS for large-scale file storage and parallel processing.</p>
+                    <button class="explain-btn mt-4 bg-secondary text-secondary-foreground hover:bg-secondary/80 px-4 py-2 rounded-md font-semibold text-sm transition-colors" data-project="Distributed File Systems">Explain with AI</button>
+                </div>
+                <div class="bg-card border border-border rounded-lg p-6 transition-all duration-300 hover:shadow-xl hover:border-primary transform hover:-translate-y-1">
+                    <h3 class="text-2xl font-semibold text-card-foreground">Game Play using Hand Gesture</h3>
+                    <p class="mt-2 text-muted-foreground">Replaced keyboard/mouse control using hand gestures, praised for innovation at a college symposium.</p>
+                    <button class="explain-btn mt-4 bg-secondary text-secondary-foreground hover:bg-secondary/80 px-4 py-2 rounded-md font-semibold text-sm transition-colors" data-project="Game Play using Hand Gesture">Explain with AI</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 text-center bg-primary text-primary-foreground rounded-lg">
+            <h2 class="text-4xl font-bold tracking-tight">Got A Project? Let's Talk</h2>
+            <a href="mailto:sarankumarktg@gmail.com" class="mt-8 inline-block bg-background text-foreground hover:bg-background/90 px-8 py-3 rounded-md font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">Contact Me</a>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-border mt-20">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-muted-foreground">
+            <p>&copy; 2024 Saran K. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- AI Project Explainer Modal -->
+    <div id="ai-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center">
+        <div class="bg-card p-8 rounded-lg shadow-xl max-w-2xl w-full m-4">
+            <h2 id="modal-title" class="text-2xl font-bold mb-4">AI Explanation</h2>
+            <div id="modal-content" class="text-muted-foreground">
+                <div class="flex justify-center items-center h-32">
+                    <div class="loader"></div>
+                </div>
+            </div>
+            <button id="close-modal" class="mt-6 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2 rounded-md font-semibold transition-colors">Close</button>
+        </div>
+    </div>
+
+    <!-- AI Chatbot -->
+    <div id="chatbot-icon" class="fixed bottom-8 right-8 bg-primary text-primary-foreground p-4 rounded-full shadow-lg cursor-pointer transform hover:scale-110 transition-transform">
+        <div id="chat-icon-open" class="w-8 h-8"></div>
+    </div>
+
+    <div id="chatbot-container" class="fixed bottom-24 right-8 bg-card border border-border rounded-lg shadow-xl w-96 h-[32rem] hidden flex-col transform translate-y-4 opacity-0">
+        <div class="bg-primary text-primary-foreground p-4 rounded-t-lg flex justify-between items-center">
+            <h3 class="font-semibold">AI Assistant</h3>
+            <button id="close-chatbot" class="text-primary-foreground">&times;</button>
+        </div>
+        <div id="chat-messages" class="flex-1 p-4 overflow-y-auto"></div>
+        <div class="p-4 border-t border-border">
+            <div class="flex gap-2">
+                <input type="text" id="chat-input" class="flex-1 bg-input border border-border rounded-md px-3" placeholder="Ask about my skills...">
+                <button id="chat-send" class="bg-primary text-primary-foreground px-4 py-2 rounded-md">Send</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // --- Theme Toggle ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const lightIcon = document.getElementById('theme-icon-light');
+        const darkIcon = document.getElementById('theme-icon-dark');
+        const html = document.documentElement;
+
+        if (localStorage.getItem('theme') === 'dark') {
+            html.classList.add('dark');
+            darkIcon.classList.remove('hidden');
+            lightIcon.classList.add('hidden');
+        } else {
+            html.classList.remove('dark');
+            lightIcon.classList.remove('hidden');
+            darkIcon.classList.add('hidden');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            if (html.classList.contains('dark')) {
+                localStorage.setItem('theme', 'dark');
+                darkIcon.classList.remove('hidden');
+                lightIcon.classList.add('hidden');
+            } else {
+                localStorage.setItem('theme', 'light');
+                lightIcon.classList.remove('hidden');
+                darkIcon.classList.add('hidden');
+            }
+        });
+        
+        // --- Mobile Menu Toggle ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // --- Defer icon rendering and other DOM manipulations until window is loaded ---
+        window.onload = function() {
+            // --- Render Lucide Icons ---
+            ReactDOM.render(React.createElement(lucide.MessageCircle, { className: 'w-8 h-8' }), document.getElementById('chat-icon-open'));
+            ReactDOM.render(React.createElement(lucide.ArrowDown, { className: 'w-8 h-8' }), document.getElementById('scroll-down-icon'));
+        };
+
+        // --- Gemini API Integration ---
+        const apiKey = ""; // This will be provided by the environment
+
+        async function callGemini(prompt, retries = 3, delay = 1000) {
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ role: "user", parts: [{ text: prompt }] }]
+            };
+
+            for (let i = 0; i < retries; i++) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        return result.candidates[0].content.parts[0].text;
+                    } else {
+                        // If the response is valid but has no content, return a default message.
+                        return "I received a response, but it was empty. Could you try rephrasing?";
+                    }
+                } catch (error) {
+                    if (i === retries - 1) {
+                        console.error("Gemini API call failed after multiple retries:", error);
+                        return "Sorry, I'm having trouble connecting to the AI. Please try again later.";
+                    }
+                    // Exponential backoff
+                    await new Promise(res => setTimeout(res, delay * Math.pow(2, i)));
+                }
+            }
+        }
+
+        // --- AI Project Explainer ---
+        const modal = document.getElementById('ai-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalContent = document.getElementById('modal-content');
+        const closeModalBtn = document.getElementById('close-modal');
+
+        document.querySelectorAll('.explain-btn').forEach(button => {
+            button.addEventListener('click', async () => {
+                const projectName = button.dataset.project;
+                modalTitle.textContent = `AI Explanation for: ${projectName}`;
+                modalContent.innerHTML = '<div class="flex justify-center items-center h-32"><div class="loader"></div></div>';
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+
+                const prompt = `Explain the project "${projectName}" in simple, easy-to-understand terms for a non-technical audience. Keep it concise and engaging.`;
+                const explanation = await callGemini(prompt);
+                modalContent.textContent = explanation;
+            });
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        });
+        
+        // --- AI Chatbot ---
+        const chatbotIcon = document.getElementById('chatbot-icon');
+        const chatbotContainer = document.getElementById('chatbot-container');
+        const closeChatbotBtn = document.getElementById('close-chatbot');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const chatSendBtn = document.getElementById('chat-send');
+
+        const resumeContext = `
+            You are a helpful AI assistant for Saran K's portfolio.
+            Saran K is an AI and Data Science student with skills in Python, HTML, CSS, Mojo, NumPy, Pandas, Matplotlib, Scikit-learn, Apache Hadoop, SQL, Apache Cassandra, Power BI, Microsoft Excel, Jupyter, VS Code, PyCharm, and Google Colab. 
+            His projects include:
+            - Commodity Price Prediction using LSTM.
+            - Customer Database Management AI with Cassandra.
+            - Distributed File Systems with HDFS.
+            - Game Play using Hand Gesture.
+            He has strong soft skills like quick learning, communication, teamwork, problem-solving, and time management.
+            Based on this information, answer the user's question.
+        `;
+
+        function addChatMessage(message, sender) {
+            const messageEl = document.createElement('div');
+            messageEl.className = `chat-message p-3 rounded-lg mb-2 ${sender === 'user' ? 'bg-primary text-primary-foreground self-end' : 'bg-secondary text-secondary-foreground self-start'}`;
+            messageEl.textContent = message;
+            chatMessages.appendChild(messageEl);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        chatbotIcon.addEventListener('click', () => {
+            chatbotContainer.classList.remove('hidden');
+            setTimeout(() => {
+                chatbotContainer.classList.remove('translate-y-4', 'opacity-0');
+            }, 10);
+        });
+
+        closeChatbotBtn.addEventListener('click', () => {
+            chatbotContainer.classList.add('translate-y-4', 'opacity-0');
+            setTimeout(() => {
+                chatbotContainer.classList.add('hidden');
+            }, 300);
+        });
+
+        async function handleChat() {
+            const userInput = chatInput.value.trim();
+            if (!userInput) return;
+
+            addChatMessage(userInput, 'user');
+            chatInput.value = '';
+
+            const prompt = `${resumeContext} User's question: "${userInput}"`;
+            const aiResponse = await callGemini(prompt);
+            addChatMessage(aiResponse, 'ai');
+        }
+
+        chatSendBtn.addEventListener('click', handleChat);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleChat();
+            }
+        });
+
+        // Configure Tailwind CSS
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        border: 'hsl(var(--border))',
+                        input: 'hsl(var(--input))',
+                        ring: 'hsl(var(--ring))',
+                        background: 'hsl(var(--background))',
+                        foreground: 'hsl(var(--foreground))',
+                        primary: {
+                            DEFAULT: 'hsl(var(--primary))',
+                            foreground: 'hsl(var(--primary-foreground))'
+                        },
+                        secondary: {
+                            DEFAULT: 'hsl(var(--secondary))',
+                            foreground: 'hsl(var(--secondary-foreground))'
+                        },
+                        muted: {
+                            DEFAULT: 'hsl(var(--muted))',
+                            foreground: 'hsl(var(--muted-foreground))'
+                        },
+                        card: {
+                            DEFAULT: 'hsl(var(--card))',
+                            foreground: 'hsl(var(--card-foreground))'
+                        },
+                        'highlight': {
+                            DEFAULT: 'hsl(var(--highlight))',
+                            foreground: 'hsl(var(--highlight-foreground))'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
