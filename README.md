@@ -11,7 +11,7 @@
       <ul>
         <li>AI & Machine Learning</li>
         <li>Data Analytics & Visualization</li>
-        <li>Generative AI & Prompt Engineering</li>
+        <li>Generative AI & Data Science</li>
         <li>Full Stack Web Development</li>
         <li>Offline LLMs & Self-hosted Tools</li>
       </ul>
